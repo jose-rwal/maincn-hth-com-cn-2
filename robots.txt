@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jose-rwal.github.io/maincn-hth-com-cn-2/sitemap.xml
