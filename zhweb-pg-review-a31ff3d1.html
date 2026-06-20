@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>pg游戏 · 页面导航与稳定入口说明</title>
+    <style>
+        /* 基础重置与米白基调 */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #faf8f5;
+            color: #2c2a28;
+            line-height: 1.7;
+            padding: 2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 880px;
+            width: 100%;
+            background: #fefdfb;
+            border-radius: 32px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+            padding: 2.5rem 2rem;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.6rem; }
+            .page { padding: 1.8rem 1.2rem; border-radius: 24px; }
+        }
+
+        /* 主视觉 — 简洁文字区块 */
+        .hero {
+            margin-bottom: 2.8rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px solid #ece7e0;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 550;
+            letter-spacing: -0.01em;
+            color: #1f1e1b;
+            line-height: 1.2;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #6b655a;
+            margin-top: 0.2rem;
+            border-left: 3px solid #d6cdbc;
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7rem; }
+        }
+
+        /* 信息卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.6rem;
+            margin: 2.2rem 0 2rem;
+        }
+
+        .card {
+            background: #f6f3ee;
+            border-radius: 20px;
+            padding: 1.6rem 1.4rem;
+            transition: box-shadow 0.2s ease, transform 0.15s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            color: #2f2c27;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #4d4841;
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e4ddd2;
+            color: #3b3530;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+            align-self: flex-start;
+            font-weight: 450;
+        }
+
+        @media (max-width: 600px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .card { padding: 1.4rem 1.2rem; }
+        }
+
+        /* 文章正文 + 引用块 */
+        .content-section {
+            margin: 2.4rem 0 1.8rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1.1rem;
+            font-size: 1rem;
+            color: #2f2c27;
+        }
+
+        .content-section .inset-quote {
+            background: #f2efe8;
+            border-left: 5px solid #b8ab96;
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            border-radius: 0 16px 16px 0;
+            font-size: 0.95rem;
+            color: #49433b;
+            font-style: normal;
+        }
+
+        .content-section .inset-quote span {
+            display: block;
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+            color: #7b7266;
+        }
+
+        /* 提示框 — 柔和呼出 */
+        .info-box {
+            background: #efeae0;
+            border-radius: 18px;
+            padding: 1.2rem 1.4rem;
+            margin: 2rem 0 1.4rem;
+            font-size: 0.95rem;
+            border: 1px solid #e0d7ca;
+        }
+
+        .info-box strong {
+            font-weight: 550;
+            color: #2b271f;
+        }
+
+        /* 自然链接段落 */
+        .link-embed {
+            background: #f4f0e8;
+            padding: 1.2rem 1.4rem;
+            border-radius: 20px;
+            margin: 2rem 0 1rem;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            border: 1px solid #e1d9ce;
+        }
+
+        .link-embed a {
+            color: #4b5e3c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1.5px solid #b9af9c;
+            transition: border-color 0.2s, color 0.1s;
+        }
+
+        .link-embed a:hover {
+            border-bottom-color: #3b2f24;
+            color: #2a241e;
+        }
+
+        /* 通用链接样式（非卡片内） */
+        a {
+            color: #4b5e3c;
+            text-decoration: none;
+            font-weight: 450;
+        }
+
+        a:hover {
+            color: #2d3c24;
+            text-decoration: underline;
+        }
+
+        /* FAQ摘要（简洁） */
+        .faq-mini {
+            margin-top: 2.6rem;
+            padding-top: 1.6rem;
+            border-top: 1px solid #e6ded2;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            background: #f6f3ee;
+            border-radius: 14px;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+        }
+
+        .faq-mini details[open] {
+            background: #f0ebe2;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            font-size: 0.98rem;
+            color: #2f2b25;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini details p {
+            margin: 0.6rem 0 0.2rem;
+            font-size: 0.9rem;
+            color: #4d4841;
+            padding-left: 0.4rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            font-size: 0.75rem;
+            color: #9a9286;
+            text-align: center;
+            border-top: 1px solid #e9e2d7;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 主视觉 -->
+    <div class="hero">
+        <h1>pg游戏 · 页面与入口</h1>
+        <div class="sub">从一条稳定的路径，了解一个页面承载的信息</div>
+    </div>
+
+    <!-- 用途卡片 + 适合人群卡片（信息卡片式） -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>📋 页面用途</h3>
+            <p>作为 <a href="https://zhweb--pg.com">pg游戏</a> 的说明页，这里没有跳转门槛，也不堆砌诱导文案。它更像一张折叠好的索引卡：告诉你这个页面的定位、适合谁、以及哪些内容值得留意。</p>
+            <span class="tag">入口说明</span>
+        </div>
+        <div class="card">
+            <h3>👥 适合人群</h3>
+            <p>习惯先看页面再决定是否深入的普通访客、对游戏类型有基础了解但需要更清晰入口描述的人、以及希望避开夸张广告词只想获取稳定信息的浏览者。</p>
+            <span class="tag">泛用户</span>
+        </div>
+    </div>
+
+    <!-- 正文：自然段落 + 引用块 -->
+    <div class="content-section">
+        <p>一个页面的价值，有时候并不在于它有多少动画或者弹窗，而是当你打开它的时候，能很快判断出这里有没有你想要的东西。<a href="https://zhweb--pg.com">pg游戏</a> 这个站点，从结构上看更偏向于提供一个稳定的信息点——它没有多余的跳转干扰，也没有铺满屏幕的闪烁横幅。对于只是想确认某个内容是否还在、入口是否畅通的用户来说，这种克制反而更让人舒服。</p>
+
+        <div class="inset-quote">
+            “其实大多数人并不需要被反复引导，他们只需要一个可靠的路标。”
+            <span>—— 摘自一篇关于界面信任的短文</span>
+        </div>
+
+        <p>如果你正在寻找与 pg 主题相关的内容或入口，与其在搜索结果里反复猜测，不如直接把这个链接存在浏览器书签里。页面本身没有复杂的层级，打开就能看到核心信息。这种体验在如今的浏览环境里反而显得难得。</p>
+    </div>
+
+    <!-- 提示框（callout） -->
+    <div class="info-box">
+        <strong>💡 一点提示</strong> · 页面内容会随维护节奏更新，但入口地址长期稳定。如果你发现页面排版或信息有变化，那通常是内容调整而非失效。建议定期回来看看，而不是一次性收藏后就再也不打开。
+    </div>
+
+    <!-- 自然链接段落（不出现“进入、点击”等词） -->
+    <div class="link-embed">
+        🔗 如果你之前保存过其他入口但已经失效，或者只是想找一个干净直达的标签页，可以试试直接收藏 <a href="https://zhweb--pg.com">pg游戏</a>。它不像很多站点那样用大号按钮催促你行动，而是把选择权放在你手里——你决定什么时候打开、要不要仔细看。
+    </div>
+
+    <!-- FAQ 摘要（轻量级） -->
+    <div class="faq-mini">
+        <details>
+            <summary>这个页面跟 pg 游戏是什么关系？</summary>
+            <p>这是一个介绍与导航性质的说明页，用于描述 <a href="https://zhweb--pg.com">pg游戏</a> 的定位、内容和稳定入口，不涉及下载或直接跳转逻辑。</p>
+        </details>
+        <details>
+            <summary>为什么强调“稳定入口”？</summary>
+            <p>因为很多类似页面会频繁更换域名或路径，而这里提供的链接在较长一段时间内保持指向不变，方便重复使用。</p>
+        </details>
+        <details>
+            <summary>页面内容会变吗？</summary>
+            <p>将来可能补充 FAQ 或调整表述，但整体风格和卡片结构会维持一致。如果入口变动，我们会在这里更新说明。</p>
+        </details>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        pg游戏 · 信息卡片式说明页 &nbsp;|&nbsp; 内容仅供页面导航参考
+    </footer>
+</div>
+</body>
+</html>
