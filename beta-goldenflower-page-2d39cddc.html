@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>炸金花游戏 · 信息索引页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f7fa;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1a2b34;
+            padding: 1rem 1rem 2.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉区域 – 网格+蓝绿点缀 */
+        .hero-card {
+            background: linear-gradient(145deg, #d9eee9, #b4d9d0);
+            border-radius: 28px;
+            padding: 2.2rem 1.8rem;
+            margin: 1.2rem 0 2rem;
+            box-shadow: 0 12px 30px -10px rgba(30, 80, 80, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-card h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #054a47;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            display: inline-block;
+            padding: 0.3rem 1.8rem;
+            border-radius: 60px;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .hero-tagline {
+            max-width: 680px;
+            font-size: 1.05rem;
+            color: #1b4b49;
+            background: rgba(240, 255, 250, 0.6);
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            backdrop-filter: blur(1px);
+            margin: 0.5rem 0 0.8rem;
+        }
+
+        .hero-grid-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            width: 100%;
+            max-width: 650px;
+            margin: 1.5rem 0 0;
+        }
+
+        .meta-chip {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(3px);
+            border-radius: 40px;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.9rem;
+            color: #0a4d4a;
+            border: 1px solid #a2cdc4;
+            box-shadow: 0 2px 6px rgba(40, 100, 90, 0.06);
+        }
+
+        /* 网格卡片区 – 明快卡片+蓝绿点缀 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.4rem;
+            margin: 2.2rem 0;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.5rem 1.3rem 1.6rem;
+            box-shadow: 0 6px 18px rgba(28, 78, 72, 0.04);
+            border: 1px solid #dcf0ea;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(25, 75, 70, 0.08);
+            border-color: #aad3ca;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 550;
+            color: #07534e;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-card h3::before {
+            content: "◆";
+            color: #27897d;
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-right: 4px;
+        }
+
+        .info-card p, .info-card li {
+            font-size: 0.96rem;
+            color: #1e3b3a;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card ul li::before {
+            content: "•";
+            color: #39998b;
+            font-weight: bold;
+            display: inline-block;
+            width: 1rem;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 10px;
+            margin-top: 0.6rem;
+        }
+
+        .badge-list span {
+            background: #e5f3ef;
+            color: #115c55;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            border: 1px solid #b4d6ce;
+        }
+
+        /* 自然链接段落 – 融入内容中 */
+        .link-paragraph {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 1.5rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border: 1px solid #bcd9d1;
+            box-shadow: 0 4px 12px rgba(26, 75, 70, 0.03);
+        }
+
+        .link-paragraph p {
+            margin-bottom: 0.85rem;
+            font-size: 1rem;
+            color: #1b3a37;
+        }
+
+        .link-paragraph a {
+            color: #1b786b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #7fc1b4;
+            padding-bottom: 0.06rem;
+            transition: border-color 0.15s, background 0.1s;
+        }
+
+        .link-paragraph a:hover {
+            border-bottom-color: #0a5b50;
+            background: #e0f2ed;
+            border-radius: 4px;
+        }
+
+        /* FAQ 摘要 – 简洁网格 */
+        .faq-mini {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 2.2rem 0 0.8rem;
+        }
+
+        .faq-item {
+            background: #f3fbf9;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            border-left: 5px solid #39998b;
+        }
+
+        .faq-item strong {
+            display: block;
+            color: #054f49;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-item span {
+            font-size: 0.9rem;
+            color: #245e58;
+        }
+
+        /* 页脚 – 干净 */
+        .footer-note {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #597a74;
+            border-top: 1px solid #c9e2da;
+            padding-top: 1.2rem;
+        }
+
+        .footer-note a {
+            color: #1d7b6e;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero-card h1 {
+                font-size: 1.6rem;
+                padding: 0.2rem 1.2rem;
+            }
+            .hero-tagline {
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+            }
+            .card-grid {
+                gap: 1rem;
+            }
+            .info-card {
+                padding: 1.2rem;
+            }
+            .link-paragraph {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            body {
+                padding: 2rem 2.5rem;
+            }
+            .hero-card {
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 主视觉 – 网格卡片式抬头 -->
+    <div class="hero-card">
+        <h1>炸金花游戏</h1>
+        <div class="hero-tagline">资料整理 · 信息索引 · 玩家笔记</div>
+        <div class="hero-grid-meta">
+            <span class="meta-chip">📚 规则整理</span>
+            <span class="meta-chip">🧩 场景分类</span>
+            <span class="meta-chip">📋 术语笔记</span>
+            <span class="meta-chip">🔍 常见变体</span>
+        </div>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 (网格) -->
+    <div class="card-grid">
+        <div class="info-card">
+            <h3>信息整理用途</h3>
+            <p>从资料索引的角度看，炸金花游戏常被归纳为纸牌比较类中的“暗牌心理”分支。以下信息方向常被整理：</p>
+            <ul>
+                <li>基础牌型与大小顺序（豹子、同花顺、金花等）</li>
+                <li>常见规则变体（闷牌、比牌次数、底注设置）</li>
+                <li>概率与策略参考（民间统计）</li>
+                <li>相关术语表（暗牌、明牌、喜钱等）</li>
+            </ul>
+            <div class="badge-list">
+                <span>豹子</span>
+                <span>同花顺</span>
+                <span>金花</span>
+                <span>顺子</span>
+                <span>对子</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>适合人群</h3>
+            <p>无论您是初次了解还是想系统梳理资料，以下人群常借助索引页获取概览：</p>
+            <ul>
+                <li>聚会组织者 —— 快速查阅游戏框架</li>
+                <li>规则科普爱好者 —— 收集不同版本说明</li>
+                <li>策略讨论者 —— 比较概率与打法</li>
+                <li>文化记录者 —— 整理民间牌戏演变</li>
+            </ul>
+            <p style="margin-top: 0.6rem; color: #2b6b62;">信息卡片方式让零散知识更容易归类。</p>
+        </div>
+
+        <div class="info-card">
+            <h3>场景索引</h3>
+            <p>在不同场合下，炸金花游戏的信息侧重点有所不同：</p>
+            <ul>
+                <li><strong>休闲娱乐</strong> – 侧重简明规则与入门流程</li>
+                <li><strong>资料归档</strong> – 侧重规则历史与地区变体</li>
+                <li><strong>策略分析</strong> – 侧重概率表与对抗思路</li>
+                <li><strong>文化整理</strong> – 侧重各地称谓与玩法差异</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 (嵌入在内容中) -->
+    <div class="link-paragraph">
+        <p>对于希望进一步查阅规则细节、牌型比较或社区讨论的朋友，可以前往由玩家和资料整理者维护的索引站点。该页面以信息卡片形式汇总了关于 <a href="https://beta-goldenflower.com">炸金花游戏</a> 的基础结构、常见术语以及一些变体说明，适合作为起点参考。资料内容保持定期核对，但规则细节可能因地区或房间设定有所差异，建议结合具体场景再次确认。</p>
+        <p>索引本身不提供任何形式的对局或下注服务，仅作为信息汇集页面供使用者参考。如果您对完整牌型列表或具体概率推导感兴趣，可以配合其他可靠资料一起阅读。</p>
+    </div>
+
+    <!-- FAQ 摘要 (适合卡片化) -->
+    <div style="margin-top: 2rem;">
+        <h3 style="font-weight: 500; color: #054a47; margin-bottom: 0.8rem; letter-spacing: 0.3px;">📌 常见问题摘要（信息索引版）</h3>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <strong>❓ 牌型大小顺序是怎样的？</strong>
+                <span>豹子 &gt; 同花顺 &gt; 金花 &gt; 顺子 &gt; 对子 &gt; 散牌。部分变体加入特殊牌型。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ “闷牌”是什么意思？</strong>
+                <span>指不看牌直接下注或跟注，属于心理博弈策略，某些规则中限制闷牌次数。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 哪里能找到不同地区叫法？</strong>
+                <span>如“扎金花”“赢三张”“拼三张”等，索引卡片常收录别名对照表。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 适合几个人玩？</strong>
+                <span>通常 2–6 人，部分变体支持更多玩家。人数影响牌局节奏与策略。</span>
+            </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #3b6c65; margin-top: 0.8rem;">* FAQ 内容基于常见信息整理，具体以您参考的规则为准。</p>
+    </div>
+
+    <!-- 页脚：信息索引说明 + 不含诱导 -->
+    <div class="footer-note">
+        <span>信息卡片式索引页 · 资料整理性质</span><br>
+        <span style="font-size: 0.8rem; opacity: 0.8;">内容仅供学习与参考，不构成任何引导。</span>
+    </div>
+
+</div>
+</body>
+</html>
